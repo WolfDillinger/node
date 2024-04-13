@@ -69,7 +69,7 @@ authReouter.post("/api/isValidToken", async (req, res) => {
         if (!verfifid) {
             return res.json(false);
         } else {
-            const user = await User.findOne({id: verfifid.id});
+            const user = await User.findOne({_id: verfifid.id});
 
             if (!user) {
                 return res.json(true);
@@ -99,7 +99,7 @@ authReouter.post("/api/update", async (req, res) => {
         if (!verfifid) {
             return res.json(false);
         } else {
-            const user = await User.findOne({id: verfifid.id});
+            const user = await User.findOne({_id: verfifid.id});
 
             if (!user) {
               await  User.updateOne({_id:verfifid.id} ,{ $set: {"address":address}});
@@ -155,13 +155,10 @@ authReouter.post("/api/delete", async (req, res) => {
 });
 
 authReouter.get( "/",myAuth ,async(req,res)=>{
+   
+   const user = await User.findOne({_id: req.user});  
 
-    const token = req.header('jcp-auth');
 
-    console.log(token);
-    
-   const user = await User.findOne({id: req.userId});  
-     
    res.json({...user._doc,token:req.token});  
 });
 
