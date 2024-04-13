@@ -101,7 +101,7 @@ authReouter.post("/api/update", async (req, res) => {
         } else {
             const user = await User.findOne({_id: verfifid.id});
 
-            if (!user) {
+            if (user) {
               await  User.updateOne({_id:verfifid.id} ,{ $set: {"address":address}});
               return res.json(true);
             }
@@ -147,7 +147,7 @@ authReouter.post("/api/delete", async (req, res) => {
 
         await user.deleteOne({phone:phone});
 
-        return res.status(200).json({ meg: 'this phone number deleted now', });
+        return res.status(200).json({ meg: 'Account deleted', });
 
     } catch (err) {
         res.status(500).json({ error: err.meg });
