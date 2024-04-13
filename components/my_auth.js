@@ -6,7 +6,7 @@ const myAuth = async  (req , res, next) => {
         let token = req.header('jcp-auth');
         
         if (!token) {
-            return res.status(401).json({ msg: 'No Token Provided' });
+            return res.status(401).json({ meg: 'No Token Provided' });
         }
 
         const verifiedToken = jwt.verify(token, "myKeyPass");
