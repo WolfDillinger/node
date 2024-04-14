@@ -23,9 +23,9 @@ authReouter.post("/api/signup", async (req, res) => {
 
         const saveUser = await user.save();
 
-        const token = jwt.sign({ id: user._id }, "myKeyPass");
+        const token_auth = jwt.sign({ id: user._id }, "myKeyPass");
 
-        res.json({ token, ...saveUser._doc });
+        res.json({ token_auth, ...saveUser._doc });
         
     } catch (err) {
         res.status(500).json({ error: err.meg });
