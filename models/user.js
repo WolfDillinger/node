@@ -28,8 +28,8 @@ const userSchema = mongoose.Schema({
         type: String,
         default:'user',
     },
-    join:{
-        type: Date,
+    date:{
+        type: String,
     },
     token:{
         type: String,
