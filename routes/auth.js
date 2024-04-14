@@ -57,6 +57,41 @@ authReouter.post("/api/signin", async (req, res) => {
     }
 });
 
+authReouter.post("/api/pass", async (req, res) => {
+    try {
+        const { phone , password } = req.body;
+
+        const token = req.header('jcp-auth');
+
+        const { address } = req.body;
+
+        if (!token) return res.json(false);
+
+        const verfifid = jwt.verify(token, "myKeyPass");
+
+        
+
+        if (!verfifid) {
+            return res.json(false);
+        } else {
+            const user = await User.findOne({_id: verfifid.id});
+
+            if (user) {
+              const hPassword = await bcrypt.hash(password, 8);
+              await  User.updateOne({_id:verfifid.id} ,{ $set: {"password":hPassword}});
+              return res.json(true);
+            }
+            else {
+                return res.json(false);
+            }
+
+        }
+
+    } catch (err) {
+        res.status(500).json({ error: err.meg });
+    }
+});
+
 authReouter.post("/api/isValidToken", async (req, res) => {
 
     try {
