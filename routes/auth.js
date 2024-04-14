@@ -9,7 +9,7 @@ const authReouter = express.Router();
 authReouter.post("/api/signup", async (req, res) => {
 
     try {
-        const { fName, lName, phone, address, password, date } = req.body;
+        const { fName, lName, phone, address, password, date , token , countrycode ,country } = req.body;
 
         const findUser = await User.findOne({ phone });
 
@@ -19,7 +19,7 @@ authReouter.post("/api/signup", async (req, res) => {
 
         const hPassword = await bcrypt.hash(password, 8);
 
-        let user = new User({ fName, lName, address, phone, password: hPassword, date  });
+        let user = new User({ fName, lName, address, phone, password: hPassword, date ,token , countrycode ,country });
 
         const saveUser = await user.save();
 
