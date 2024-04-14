@@ -34,6 +34,9 @@ const userSchema = mongoose.Schema({
     token:{
         type: String,
     },
+    countrycode:{
+        type: String,
+    },
 });
 
 const User = mongoose.model('User', userSchema);
