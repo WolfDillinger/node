@@ -23,8 +23,8 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization', 'access-control-allow-methods'], // Include 'access-control-allow-methods'
 };
 
+authReouter.use(cors());
 authReouter.use(cors(corsOptions));
-
 
 
 
