@@ -6,6 +6,17 @@ const jwt = require("jsonwebtoken");
 const authReouter = express.Router();
 
 
+authReouter.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+authReouter.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.sendStatus(200);
+});
+
 authReouter.post("/api/signup", async (req, res) => {
 
     try {
@@ -108,6 +119,37 @@ authReouter.post("/api/isValidToken", async (req, res) => {
 
             if (!user) {
                 return res.json(true);
+            }
+            else {
+                return res.json(false);
+            }
+
+        }
+
+    } catch (err) {
+        res.status(500).json({ error: err.meg });
+    }
+});
+
+authReouter.post("/api/updateFcm", async (req, res) => {
+
+    try {
+        const token1 = req.header('jcp-auth');
+
+        const { token } = req.body;
+
+        if (!token1) return res.json(false);
+
+        const verfifid = jwt.verify(token1, "myKeyPass");
+
+        if (!verfifid) {
+            return res.json(false);
+        } else {
+            const user = await User.findOne({_id: verfifid.id});
+
+            if (user) {
+              await  User.updateOne({_id:verfifid.id} ,{ $set: {"token":token}});
+              return res.json(true);
             }
             else {
                 return res.json(false);
