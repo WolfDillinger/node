@@ -6,17 +6,6 @@ const jwt = require("jsonwebtoken");
 const cors = require('cors');
 const authReouter = express.Router();
 
-
-
-const corsOptions = {
-  origin: 'https://batayneh-store.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization', 'access-control-allow-methods'], // Include 'access-control-allow-methods'
-};
-
-authReouter.use(cors(corsOptions));
-
-
 authReouter.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -27,6 +16,17 @@ authReouter.options('*', (req, res) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.sendStatus(200);
 }); 
+
+const corsOptions = {
+  origin: 'https://batayneh-store.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization', 'access-control-allow-methods'], // Include 'access-control-allow-methods'
+};
+
+authReouter.use(cors(corsOptions));
+
+
+
 
 authReouter.post("/api/signup", async (req, res) => {
 
