@@ -3,7 +3,18 @@ const User = require("../models/user");
 const myAuth = require("../components/my_auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const cors = require('cors');
 const authReouter = express.Router();
+
+
+
+const corsOptions = {
+  origin: 'https://batayneh-store.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization', 'access-control-allow-methods'], // Include 'access-control-allow-methods'
+};
+
+authReouter.use(cors(corsOptions));
 
 
 /* authReouter.use(function(req, res, next) {
