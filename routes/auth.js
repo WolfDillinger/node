@@ -31,7 +31,7 @@ authReouter.use(cors(corsOptions));
 authReouter.post("/api/signup", async (req, res) => {
 
     try {
-        const { fName, lName, phone, address, password, date , token , countrycode ,country } = req.body;
+        const { fName, lName, phone, address, password, date , token , countrycode ,country , type } = req.body;
 
         const findUser = await User.findOne({ phone });
 
@@ -41,7 +41,7 @@ authReouter.post("/api/signup", async (req, res) => {
 
         const hPassword = await bcrypt.hash(password, 8);
 
-        let user = new User({ fName, lName, address, phone, password: hPassword, date ,token , countrycode ,country });
+        let user = new User({ fName, lName, address, phone, password: hPassword, date ,token , countrycode ,country , type });
 
         const saveUser = await user.save();
 
