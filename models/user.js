@@ -26,7 +26,8 @@ const userSchema = mongoose.Schema({
     },
     type:{
         type: String,
-        default:'user',
+        required: true,
+        //default:'user',
     },
     date:{
         type: String,
