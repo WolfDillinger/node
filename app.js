@@ -10,7 +10,7 @@ const DBC = "mongodb+srv://jcpofficialjo:mg9kxsNz64P1RlH4@cluster0.ugf8uor.mongo
 const app = express();
 
 const corsOptions = {
-  origin: 'https://batayneh-store.com',
+  origin: 'https://jordancarparts.net',
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the allowed methods
   allowedHeaders: ['Content-Type', 'Authorization', 'access-control-allow-methods'], // Include 'access-control-allow-methods'
 };
