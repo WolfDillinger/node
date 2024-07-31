@@ -18,7 +18,7 @@ authReouter.options('*', (req, res) => {
 }); 
 
 const corsOptions = {
-  origin: 'https://batayneh-store.com',
+  origin: 'https://jordancarparts.net',
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the allowed methods
   allowedHeaders: ['Content-Type', 'Authorization', 'access-control-allow-methods'], // Include 'access-control-allow-methods'
 };
